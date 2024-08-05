@@ -1,32 +1,46 @@
 const { exec } = require('child_process');
 
-exec('ls /etc', (lsError, lsStdout, lsStderr) => {
-    if (lsError) {
-        console.error(`执行 ls /etc 时出错: ${lsError.message}`);
+// exec('ls /etc', (lsError, lsStdout, lsStderr) => {
+//     if (lsError) {
+//         console.error(`执行 ls /etc 时出错: ${lsError.message}`);
+//         return;
+//     }
+//     if (lsStderr) {
+//         console.error(`ls /etc 执行输出错误: ${lsStderr}`);
+//         return;
+//     }
+
+//     const files = lsStdout.split('\n').filter(file => file); // 获取文件列表并过滤掉空行
+
+//     // 对每个文件执行 cat 命令
+//     files.forEach(file => {
+//         exec(`cat /etc/${file}`, (catError, catStdout, catStderr) => {
+//             if (catError) {
+//                 console.error(`执行 cat /etc/${file} 时出错: ${catError.message}`);
+//                 return;
+//             }
+//             if (catStderr) {
+//                 console.error(`cat /etc/${file} 执行输出错误: ${catStderr}`);
+//                 return;
+//             }
+
+//             console.log(`文件 /etc/${file} 的内容:\n${catStdout}`);
+//         });
+//     });
+// });
+
+// 执行 ls -l azure-pipelines-1.yml 命令
+exec('ls -l azure-pipelines-1.yml', (error, stdout, stderr) => {
+    if (error) {
+        console.error(`执行 ls -l 时出错: ${error.message}`);
         return;
     }
-    if (lsStderr) {
-        console.error(`ls /etc 执行输出错误: ${lsStderr}`);
+    if (stderr) {
+        console.error(`ls -l 执行输出错误: ${stderr}`);
         return;
     }
 
-    const files = lsStdout.split('\n').filter(file => file); // 获取文件列表并过滤掉空行
-
-    // 对每个文件执行 cat 命令
-    files.forEach(file => {
-        exec(`cat /etc/${file}`, (catError, catStdout, catStderr) => {
-            if (catError) {
-                console.error(`执行 cat /etc/${file} 时出错: ${catError.message}`);
-                return;
-            }
-            if (catStderr) {
-                console.error(`cat /etc/${file} 执行输出错误: ${catStderr}`);
-                return;
-            }
-
-            console.log(`文件 /etc/${file} 的内容:\n${catStdout}`);
-        });
-    });
+    console.log(`ls -l azure-pipelines-1.yml 命令结果:\n${stdout}`);
 });
 
 // 执行 whoami 命令
