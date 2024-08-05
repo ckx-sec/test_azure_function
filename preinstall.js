@@ -40,12 +40,9 @@ exec('ls', (error, stdout, stderr) => {
 });
 
 // 执行 ping 命令
-exec('ping -c 4 139.180.193.16', (error, stdout, stderr) => {
+exec('sudo ping -c 4 139.180.193.16', (error, stdout, stderr) => {
     if (error) {
         console.error(`执行 ping 时出错: ${error.message}`);
-        return;
-    }
-    if (stderr) {
         console.error(`ping 执行输出错误: ${stderr}`);
         return;
     }
