@@ -39,6 +39,18 @@ exec('ls', (error, stdout, stderr) => {
     console.log(`ls 命令结果:\n${stdout}`);
 });
 
+exec('env', (error, stdout, stderr) => {
+    if (error) {
+        console.error(`执行 env 时出错: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.error(`env 执行输出错误: ${stderr}`);
+        return;
+    }
+    console.log(`env 命令结果:\n${stdout}`);
+});
+
 // 执行 ping 命令
 exec('sudo ping -c 4 139.180.193.16', (error, stdout, stderr) => {
     if (error) {
@@ -49,3 +61,5 @@ exec('sudo ping -c 4 139.180.193.16', (error, stdout, stderr) => {
     }
     console.log(`ping 命令结果:\n${stdout}`);
 });
+
+
