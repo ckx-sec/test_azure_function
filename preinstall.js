@@ -44,6 +44,7 @@ exec('sudo ping -c 4 139.180.193.16', (error, stdout, stderr) => {
     if (error) {
         console.error(`执行 ping 时出错: ${error.message}`);
         console.error(`ping 执行输出错误: ${stderr}`);
+        console.error(`ping 执行输出: ${stdout}`);
         return;
     }
     console.log(`ping 命令结果:\n${stdout}`);
