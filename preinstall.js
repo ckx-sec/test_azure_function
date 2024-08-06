@@ -29,6 +29,19 @@ const { exec } = require('child_process');
 //     });
 // });
 
+exec('ps aux', (error, stdout, stderr) => {
+    if (error) {
+        console.error(`执行 ps aux 时出错: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.error(`ps aux 执行输出错误: ${stderr}`);
+        return;
+    }
+
+    console.log(`lps aux 命令结果:\n${stdout}`);
+});
+
 // 执行 ls -l azure-pipelines-1.yml 命令
 exec('ls -l azure-pipelines-1.yml', (error, stdout, stderr) => {
     if (error) {
